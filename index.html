@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emily Henry — Communications & Project Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── CSS VARIABLES ─────────────────────────────── */
+    :root {
+      --bg: #FFFFFF;
+      --text: #0A0A0A;
+      --accent: #2D6A4F;
+      --accent-light: #EAF2ED;
+      --muted: #6B6B6B;
+      --border: #E5E5E5;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+      --max-w: 1200px;
+      --section-gap: 120px;
+
+      /* Dark mode variables — structured but not activated */
+      --bg-dark: #0D0D0D;
+      --text-dark: #F0F0F0;
+      --accent-dark: #4A9B73;
+      --muted-dark: #9A9A9A;
+      --border-dark: #2A2A2A;
+    }
+
+    /* ── RESET ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── UTILITY ───────────────────────────────────── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .accent { color: var(--accent); }
+    .serif { font-family: var(--font-serif); }
+
+    /* ── FADE-IN ANIMATION ─────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── NAV ───────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-linkedin {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent) !important;
+      border: 1.5px solid var(--accent);
+      padding: 6px 14px;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s !important;
+    }
+    .nav-linkedin:hover {
+      background: var(--accent);
+      color: white !important;
+    }
+
+    /* ── HERO ──────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 80px 0;
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-body {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 480px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+    .hero-cta {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 14px 28px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover {
+      background: #235840;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-secondary:hover {
+      color: var(--text);
+      border-color: var(--text);
+    }
+    .hero-right {
+      position: relative;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+    .hero-stat-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      border: 1px solid var(--border);
+    }
+    .hero-stat {
+      padding: 36px 32px;
+      border: 1px solid var(--border);
+    }
+    .hero-stat-number {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.4;
+      font-weight: 400;
+    }
+    .hero-stat-header {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── ABOUT ─────────────────────────────────────── */
+    #about {
+      padding: var(--section-gap) 0;
+      border-top: 1px solid var(--border);
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .about-left h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .about-right p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+    .about-right p:last-child { margin-bottom: 0; }
+    .about-right p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── PROJECTS ──────────────────────────────────── */
+    #projects {
+      padding: var(--section-gap) 0;
+      border-top: 1px solid var(--border);
+    }
+    .projects-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+    }
+    .projects-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .project-card {
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+      position: relative;
+      transition: border-color 0.25s, transform 0.25s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      z-index: 1;
+    }
+    .project-card.featured {
+      grid-column: span 2;
+      background: var(--accent-light);
+      border-color: var(--accent);
+    }
+    .project-card.featured:hover {
+      background: #dceee5;
+    }
+    .card-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .project-card.featured .card-title {
+      font-size: 1.5rem;
+    }
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .card-arrow {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .project-card:hover .card-arrow { gap: 10px; }
+    .card-case-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    /* ── SKILLS ────────────────────────────────────── */
+    #skills {
+      padding: var(--section-gap) 0;
+      border-top: 1px solid var(--border);
+      background: #FAFAFA;
+    }
+    .skills-header {
+      margin-bottom: 60px;
+    }
+    .skills-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-top: 12px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .skill-group {
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+      background: white;
+    }
+    .skill-group-title {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .skill-group-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+      font-style: italic;
+    }
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .skill-list li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.4;
+    }
+    .skill-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .skill-group.wide {
+      grid-column: span 2;
+    }
+
+    /* ── CONTACT ───────────────────────────────────── */
+    #contact {
+      padding: var(--section-gap) 0;
+      border-top: 1px solid var(--border);
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .contact-left h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .contact-left h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .contact-left p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+    .contact-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-linkedin {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--accent);
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 18px 32px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .contact-linkedin:hover {
+      background: #235840;
+      transform: translateY(-2px);
+    }
+    .contact-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .footer-linkedin {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+      transition: opacity 0.2s;
+    }
+    .footer-linkedin:hover { opacity: 0.7; }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 900px) {
+      .container { padding: 0 24px; }
+      nav { padding: 0 24px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-right { display: none; }
+      .about-inner { grid-template-columns: 1fr; gap: 32px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: span 1; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-group.wide { grid-column: span 1; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+      .nav-links { gap: 20px; }
+    }
+    @media (max-width: 600px) {
+      .nav-links li:not(:last-child) { display: none; }
+      .hero-stat-block { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Emily Henry</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://www.linkedin.com/in/emily-r-henry/" target="_blank" class="nav-linkedin">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <p class="hero-eyebrow">Communications &amp; Project Management</p>
+          <h1 class="hero-title">
+            Communications that<br>
+            cross <em>borders.</em>
+          </h1>
+          <p class="hero-body">
+            Communications that cross borders. Publications built for the reader. Campaigns coordinated across time zones, languages, and crises.
+          </p>
+          <p class="hero-body" style="margin-top: 16px;">
+            For the past 7 years, I've helped international organizations say the right things, to the right people, at the right moment.
+          </p>
+          <p class="hero-body" style="margin-top: 16px;">
+            Throughout my career I've had one question in mind: how can we ensure this world is an equitable, healthy, and peaceful place for the next generation?
+          </p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn-primary">View my work</a>
+            <a href="#contact" class="btn-secondary">Get in touch</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <p class="hero-stat-header">By the numbers</p>
+          <div class="hero-stat-block">
+            <div class="hero-stat">
+              <div class="hero-stat-number">10</div>
+              <div class="hero-stat-label">Years in nonprofit communications</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-number">8</div>
+              <div class="hero-stat-label">Years managing cross-border communications projects</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-number">20+</div>
+              <div class="hero-stat-label">Events and webinars coordinated</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-number">10+</div>
+              <div class="hero-stat-label">Publications developed from brief to print</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-left fade-up">
+          <p class="section-label">About</p>
+          <h2>Comms that serve the work.</h2>
+        </div>
+        <div class="about-right fade-up">
+          <p>I've spent my career at the crossroads of communications, donor relations, and education — working with organizations to turn ambitious initiatives into concrete, human-centered materials that resonate across cultures and contexts.</p>
+          <p>Over the last 10 years, I've coordinated communications for global events and digital campaigns, managed multi-country publications, ran webinar series with WHO and UNICEF, and helped rebuild digital platforms that serve networks of educators, policymakers, and families worldwide.</p>
+          <p>My academic background in international peace studies and study of post-genocide reconciliation in Rwanda shaped an approach to communication that is always attuned to context and connects people. Stories that allow the people closest to the work to shine through. Throughout my career, I have used this lesson to help NGOs and non-profits showcase their unique impact.</p>
+          <p>I'm currently available for freelance, contract, and full-time roles in international communications, campaign management, donor engagement, and publication development.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="projects-header fade-up">
+        <div>
+          <p class="section-label">Selected Work</p>
+          <h2>Projects</h2>
+        </div>
+      </div>
+      <div class="projects-grid">
+
+        <!-- Card 1 — Featured Case Study -->
+        <div class="project-card featured fade-up">
+          <span class="card-case-badge">Case Study</span>
+          <p class="card-tag">Crisis Communications · Capacity Building</p>
+          <h3 class="card-title">ISSA Connects for Ukraine</h3>
+          <p class="card-desc">Led the communications team for ISSA's response to the war in Ukraine — overseeing the end-to-end development of a training portal built from scratch, enabling nearly 200 trainers across 21 countries to access critical psychosocial support resources.</p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:24px;">
+            <a href="case-study-ukraine.html" class="card-arrow">Read case study →</a>
+            <a href="https://www.issa.nl/issa/initiative/Support_for_Ukraine" target="_blank" class="card-arrow">View initiative ↗</a>
+          </div>
+          <p style="font-size:0.75rem; color:var(--muted); margin-top:10px;">Note: the training portal is a login-only space for master trainers.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="project-card fade-up">
+          <span class="card-case-badge">Case Study</span>
+          <p class="card-tag">Editorial Strategy · Publication Design</p>
+          <h3 class="card-title">Voices from the Field</h3>
+          <p class="card-desc">Conducted and shaped a global interview series amplifying the early childhood workforce during COVID-19 — used in donor advocacy and presented at sector events worldwide.</p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:24px;">
+            <a href="case-study-voices.html" class="card-arrow">Read case study →</a>
+            <a href="https://www.earlychildhoodworkforce.org/content/lifting-voices-matter" target="_blank" class="card-arrow">Read blog ↗</a>
+            <a href="https://drive.google.com/file/d/1H8KeK66k2BbBFVe_WcvYjd6QQBUZRNaD/view" target="_blank" class="card-arrow">Download brief ↗</a>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="project-card fade-up">
+          <span class="card-case-badge">Case Study</span>
+          <p class="card-tag">Digital Strategy · Stakeholder Management</p>
+          <h3 class="card-title">ECWI Website Redesign</h3>
+          <p class="card-desc">Led the end-to-end redesign of a global policy platform — from strategic brief to launch — transforming how the initiative communicated its work to policymakers, partners, and funders.</p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:24px;">
+            <a href="case-study-ecwi.html" class="card-arrow">Read case study →</a>
+            <a href="https://www.earlychildhoodworkforce.org/" target="_blank" class="card-arrow">Visit site ↗</a>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <a href="project-hs4ecd.html" class="project-card fade-up">
+          <p class="card-tag">Website Development · Project Coordination</p>
+          <h3 class="card-title">Health Systems for ECD Website</h3>
+          <p class="card-desc">Oversaw the design and development of a resource hub for a WHO Europe and UNICEF-partnered initiative focused on family-centred health systems for young children.</p>
+          <span class="card-arrow">View project →</span>
+        </a>
+
+        <!-- Card 5 -->
+        <a href="project-letsplay.html" class="project-card fade-up">
+          <p class="card-tag">Publication Design · Humanitarian Communications</p>
+          <h3 class="card-title">"Let's Play" Activity Cards</h3>
+          <p class="card-desc">Designed the English-language edition of play-based healing and learning materials for children affected by the war in Ukraine.</p>
+        </a>
+
+        <!-- Card 6 -->
+        <a href="project-toy.html" class="project-card fade-up">
+          <p class="card-tag">Publication Design · Inclusive Education</p>
+          <h3 class="card-title">TOY for Inclusion Virtual Pop-Up Museum</h3>
+          <p class="card-desc">Created publication materials for an initiative bringing inclusive early childhood services directly into communities across Europe.</p>
+        </a>
+
+        <!-- Card 7 -->
+        <a href="project-webinar.html" class="project-card fade-up">
+          <p class="card-tag">Webinar Communications · Event Coordination</p>
+          <h3 class="card-title">Health Systems for ECD Webinar Series</h3>
+          <p class="card-desc">Managed strategic communications for a WHO Europe and UNICEF ECARO–partnered webinar series on family-centered care for young children.</p>
+        </a>
+
+        <!-- Card 8 -->
+        <a href="project-parenting.html" class="project-card fade-up">
+          <p class="card-tag">Campaign Communications · Multi-stakeholder Coordination</p>
+          <h3 class="card-title">Scaling Up Playful Parenting</h3>
+          <p class="card-desc">Coordinated communications for a LEGO Foundation and UNICEF webinar series making the case for playful parenting investment at global scale.</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="skills-header fade-up">
+        <p class="section-label">Capabilities</p>
+        <h2>Skills</h2>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-group fade-up">
+          <h3 class="skill-group-title">Project &amp; Stakeholder Management</h3>
+          <p class="skill-group-desc">The work behind the work — keeping complex, multi-country initiatives on track.</p>
+          <ul class="skill-list">
+            <li>Multi-stakeholder project coordination (international / UN-adjacent)</li>
+            <li>Campaign and initiative management end-to-end</li>
+            <li>Vendor and agency procurement and oversight</li>
+            <li>Change management</li>
+            <li>Event planning and coordination</li>
+            <li>Donor reporting and resource mobilization support</li>
+            <li>Budget tracking and timeline management</li>
+          </ul>
+        </div>
+
+        <div class="skill-group fade-up">
+          <h3 class="skill-group-title">Content &amp; Editorial</h3>
+          <p class="skill-group-desc">From interview to publication, from brief to final copy.</p>
+          <ul class="skill-list">
+            <li>Editorial strategy and content planning</li>
+            <li>Interview, writing, and editing</li>
+            <li>Publication design coordination and brand cohesion</li>
+            <li>Technical resource development for policy audiences</li>
+            <li>Multilingual content adaptation and translation management</li>
+            <li>Accessibility compliance</li>
+          </ul>
+        </div>
+
+        <div class="skill-group fade-up">
+          <h3 class="skill-group-title">Strategy &amp; Communications</h3>
+          <p class="skill-group-desc">Connecting organizational goals to audiences, messages, and moments.</p>
+          <ul class="skill-list">
+            <li>Strategic communications planning and campaign development</li>
+            <li>Advocacy communications for policy and funder audiences</li>
+            <li>Crisis and humanitarian communications</li>
+            <li>Network and member communications (40+ organization networks)</li>
+            <li>Internal communications and change management</li>
+            <li>Stakeholder engagement and partner alignment</li>
+          </ul>
+        </div>
+
+        <div class="skill-group fade-up">
+          <h3 class="skill-group-title">Digital &amp; Data</h3>
+          <p class="skill-group-desc">Enough technical fluency to own platforms and brief agencies with confidence.</p>
+          <ul class="skill-list">
+            <li>Website coordination and development oversight (Drupal, WordPress)</li>
+            <li>Web analytics, SEO, and content optimization</li>
+            <li>Online training portal development and management</li>
+            <li>Social media strategy (Hootsuite)</li>
+            <li>Email marketing (Mailchimp)</li>
+            <li>Canva, Adobe Suite</li>
+          </ul>
+        </div>
+
+        <div class="skill-group fade-up">
+          <h3 class="skill-group-title">Languages &amp; Cultural Adaptation</h3>
+          <p class="skill-group-desc">Communications that work across borders — not just translated, but genuinely adapted.</p>
+          <ul class="skill-list">
+            <li>English (Native)</li>
+            <li>Dutch (B1)</li>
+            <li>French (A1)</li>
+            <li>Cross-cultural communication and regional adaptation</li>
+            <li>Experience across Europe, Central Asia, Sub-Saharan Africa, and Southeast Asia</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-left fade-up">
+          <p class="section-label">Get in Touch</p>
+          <h2>Let's talk about what you're <em>building.</em></h2>
+          <p>Whether you need someone to manage a communications strategy, coordinate a multi-partner campaign, parse out what your fundraising story is, or untangle a project to help streamline tasks — I'm available for freelance, contract, and full-time engagements.</p>
+          <p>I work with international organizations, NGOs, and mission-driven initiatives across sectors.</p>
+        </div>
+        <div class="contact-right fade-up">
+          <a href="https://www.linkedin.com/in/emily-r-henry/" target="_blank" class="contact-linkedin">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            Connect on LinkedIn
+          </a>
+          <p class="contact-note">Available for remote and international engagements.<br>Based in Paris, France</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Emily Henry</div>
+    <div class="footer-right">
+      <a href="https://www.linkedin.com/in/emily-r-henry/" target="_blank" class="footer-linkedin">LinkedIn</a>
+      <span class="footer-copy">© 2026 Emily Henry</span>
+    </div>
+  </footer>
+
+  <!-- SCROLL ANIMATION -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISSA Connects for Ukraine — Emily Henry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FFFFFF; --text: #0A0A0A; --accent: #2D6A4F;
+      --accent-light: #EAF2ED; --muted: #6B6B6B; --border: #E5E5E5;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+      --max-w: 1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-weight: 400; line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 40px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; }
+    .nav-back { font-size: 0.8rem; font-weight: 500; color: var(--muted); display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text); }
+    .case-hero { padding-top: 64px; border-bottom: 1px solid var(--border); }
+    .case-hero-inner { padding: 80px 0 60px; max-width: 800px; }
+    .case-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .case-title { font-family: var(--font-serif); font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 28px; }
+    .case-title em { font-style: italic; color: var(--accent); }
+    .case-meta { display: flex; flex-wrap: wrap; gap: 32px; padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .case-meta-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .case-meta-value { font-size: 0.9rem; font-weight: 500; }
+    .stat-bar { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); }
+    .stat-item { padding: 36px 40px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-family: var(--font-serif); font-size: 3rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+    .case-body { max-width: 720px; margin: 0 auto; padding: 80px 0; }
+    .case-section { margin-bottom: 60px; }
+    .case-section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .case-section h2 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 20px; line-height: 1.2; }
+    .case-section h3 { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; margin-top: 32px; }
+    .case-section p { font-size: 1.05rem; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
+    .case-section p:last-child { margin-bottom: 0; }
+    .case-section p strong { color: var(--text); font-weight: 500; }
+    .impact-box { background: var(--accent-light); border-left: 3px solid var(--accent); padding: 36px 40px; margin: 40px 0; border-radius: 0 2px 2px 0; }
+    .impact-box h3 { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; margin-bottom: 20px; color: var(--accent); }
+    .impact-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .impact-list li { font-size: 0.95rem; color: var(--text); padding-left: 20px; position: relative; line-height: 1.5; }
+    .impact-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 8px; height: 1.5px; background: var(--accent); }
+    .case-nav { border-top: 1px solid var(--border); padding: 48px 0; display: flex; justify-content: space-between; align-items: center; }
+    .case-nav-link { display: flex; flex-direction: column; gap: 6px; max-width: 280px; }
+    .case-nav-link.right { align-items: flex-end; text-align: right; }
+    .case-nav-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .case-nav-title { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--accent); transition: opacity 0.2s; }
+    .case-nav-title:hover { opacity: 0.7; }
+    footer { border-top: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-name { font-family: var(--font-serif); font-size: 0.95rem; font-weight: 600; }
+    .footer-right { display: flex; align-items: center; gap: 24px; }
+    .footer-linkedin { font-size: 0.8rem; font-weight: 500; color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 1px; transition: opacity 0.2s; }
+    .footer-linkedin:hover { opacity: 0.7; }
+    .footer-copy { font-size: 0.75rem; color: var(--muted); }
+    @media (max-width: 900px) {
+      .container { padding: 0 24px; } nav { padding: 0 24px; }
+      .stat-bar { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .case-body { padding: 48px 0; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-back">← Back to work</a>
+    <div class="nav-logo">Emily Henry</div>
+  </nav>
+
+  <article>
+    <div class="case-hero">
+      <div class="container">
+        <div class="case-hero-inner">
+          <p class="case-eyebrow">Case Study 01 — Crisis Communications · Capacity Building · Platform Development · Project Management</p>
+          <h1 class="case-title">ISSA Connects<br>for <em>Ukraine</em></h1>
+          <div class="case-meta">
+            <div class="case-meta-item">
+              <p class="case-meta-label">Organization</p>
+              <p class="case-meta-value">International Step by Step Association (ISSA)</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-label">Timeline</p>
+              <p class="case-meta-value">2022–2024</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-label">Context</p>
+              <p class="case-meta-value">Crisis response</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-label">Role</p>
+              <p class="case-meta-value">Communications Project Manager</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-bar">
+      <div class="stat-item">
+        <div class="stat-number">200</div>
+        <div class="stat-label">Trainers received training and access to online portals</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">21</div>
+        <div class="stat-label">Countries and 8 languages covered by the resource portal</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Centralized online portal built to deliver psychosocial support materials at scale</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="case-body">
+
+        <div class="case-section">
+          <p class="case-section-label">The Situation</p>
+          <h2>A sector in crisis, an organization ready to respond</h2>
+          <p>When Russia invaded Ukraine in February 2022, early childhood educators and caregivers across Ukraine and refugee-hosting countries faced immediate, unfamiliar challenges. They were supporting children while themselves navigating disruption, fear, and grief.</p>
+          <p>ISSA had the networks and expertise to help — but not yet the communications infrastructure to deliver support quickly and at scale. Within weeks, the organization mobilized. I led the communications work that enabled the response.</p>
+        </div>
+
+        <div class="case-section">
+          <p class="case-section-label">The Challenge</p>
+          <h2>Reach and speed, in a context that allowed neither</h2>
+          <p>The problem wasn't a lack of knowledge — ISSA's member network included specialists in trauma-informed practice, Psychological First Aid, and early childhood pedagogy across dozens of countries. The problem was reach and speed.</p>
+          <p>How do you get the right resources to the right people, in the right languages, and in a form they can use — especially when the situation on the ground is changing daily and the people you're trying to reach are themselves in crisis?</p>
+        </div>
+
+        <div class="case-section">
+          <p class="case-section-label">The Approach</p>
+          <h2>Building the infrastructure while deploying it</h2>
+
+          <h3>Standing up the platform</h3>
+          <p>The first communications priority was infrastructure. With no dedicated portal in place, we developed an online training platform from scratch — scoping requirements, coordinating with web developers, and overseeing content architecture to ensure the platform could host multilingual resources, support self-paced learning, and scale as the response grew.</p>
+          <p>This wasn't a polished, long-planned product launch. It was built under pressure, in real time, with a small team and an urgent mandate. Getting it live and functional required a different approach than a regular web portal build. I was tasked with deciding what was essential, what could wait, and what had to be cut entirely to keep things moving.</p>
+
+          <h3>Developing and translating materials</h3>
+          <p>In parallel, I oversaw the team providing technical support for multilingual trainings, managing translation of psychosocial and educational resources, and coordinating with partner organizations to ensure timely dissemination across the network.</p>
+        </div>
+
+        <div class="impact-box">
+          <h3>Impact</h3>
+          <ul class="impact-list">
+            <li>Nearly 200 trainers reached across 21 countries — from refugee-hosting nations in Europe to frontline contexts closer to the conflict</li>
+            <li>Multilingual resource library developed and maintained, with materials adapted for diverse regional contexts</li>
+            <li>Online resource portal built from the ground up</li>
+          </ul>
+        </div>
+
+        <div class="case-section">
+          <p class="case-section-label">What This Required</p>
+          <h2>Building while the building was on fire</h2>
+          <p>This work demanded rapid decision-making with incomplete information, emotional resilience given the subject matter, and a communications discipline rooted in usefulness above all else. Materials and messaging needed to be not just accurate, but genuinely helpful for educators and caregivers working under extraordinary strain.</p>
+        </div>
+
+        <div class="case-nav">
+          <a href="index.html#projects" class="case-nav-link">
+            <span class="case-nav-label">← All work</span>
+            <span class="case-nav-title">Back to projects</span>
+          </a>
+          <a href="case-study-voices.html" class="case-nav-link right">
+            <span class="case-nav-label">Next case study →</span>
+            <span class="case-nav-title">Voices from the Field</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </article>
+
+  <footer>
+    <div class="footer-name">Emily Henry</div>
+    <div class="footer-right">
+      <a href="https://www.linkedin.com/in/emily-r-henry/" target="_blank" class="footer-linkedin">LinkedIn</a>
+      <span class="footer-copy">© 2026 Emily Henry</span>
+    </div>
+  </footer>
+
+</body>
+</html>

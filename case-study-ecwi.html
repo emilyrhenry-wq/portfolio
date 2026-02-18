@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECWI Website Redesign — Emily Henry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #FFFFFF; --text: #0A0A0A; --accent: #2D6A4F; --accent-light: #EAF2ED; --muted: #6B6B6B; --border: #E5E5E5; --font-serif: 'Playfair Display', Georgia, serif; --font-sans: 'DM Sans', system-ui, sans-serif; --max-w: 1200px; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-weight: 400; line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 40px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; }
+    .nav-back { font-size: 0.8rem; font-weight: 500; color: var(--muted); display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text); }
+    .case-hero { padding-top: 64px; border-bottom: 1px solid var(--border); }
+    .case-hero-inner { padding: 80px 0 60px; max-width: 800px; }
+    .case-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .case-title { font-family: var(--font-serif); font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 28px; }
+    .case-title em { font-style: italic; color: var(--accent); }
+    .case-meta { display: flex; flex-wrap: wrap; gap: 32px; padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .case-meta-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .case-meta-value { font-size: 0.9rem; font-weight: 500; }
+    .stat-bar { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); }
+    .stat-item { padding: 36px 40px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-family: var(--font-serif); font-size: 3rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+    .case-body { max-width: 720px; margin: 0 auto; padding: 80px 0; }
+    .case-section { margin-bottom: 60px; }
+    .case-section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .case-section h2 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 20px; line-height: 1.2; }
+    .case-section h3 { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; margin-top: 32px; }
+    .case-section p { font-size: 1.05rem; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
+    .case-section p:last-child { margin-bottom: 0; }
+    .case-section p strong { color: var(--text); font-weight: 500; }
+    .impact-box { background: var(--accent-light); border-left: 3px solid var(--accent); padding: 36px 40px; margin: 40px 0; border-radius: 0 2px 2px 0; }
+    .impact-box h3 { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; margin-bottom: 20px; color: var(--accent); }
+    .impact-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .impact-list li { font-size: 0.95rem; color: var(--text); padding-left: 20px; position: relative; line-height: 1.5; }
+    .impact-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 8px; height: 1.5px; background: var(--accent); }
+    .case-nav { border-top: 1px solid var(--border); padding: 48px 0; display: flex; justify-content: space-between; align-items: center; }
+    .case-nav-link { display: flex; flex-direction: column; gap: 6px; max-width: 280px; }
+    .case-nav-link.right { align-items: flex-end; text-align: right; }
+    .case-nav-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .case-nav-title { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--accent); transition: opacity 0.2s; }
+    .case-nav-title:hover { opacity: 0.7; }
+    footer { border-top: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-name { font-family: var(--font-serif); font-size: 0.95rem; font-weight: 600; }
+    .footer-right { display: flex; align-items: center; gap: 24px; }
+    .footer-linkedin { font-size: 0.8rem; font-weight: 500; color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 1px; transition: opacity 0.2s; }
+    .footer-linkedin:hover { opacity: 0.7; }
+    .footer-copy { font-size: 0.75rem; color: var(--muted); }
+    @media (max-width: 900px) { .container { padding: 0 24px; } nav { padding: 0 24px; } .stat-bar { grid-template-columns: 1fr; } .stat-item { border-right: none; border-bottom: 1px solid var(--border); } .case-body { padding: 48px 0; } footer { flex-direction: column; gap: 16px; text-align: center; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-back">← Back to work</a>
+    <div class="nav-logo">Emily Henry</div>
+  </nav>
+
+  <article>
+    <div class="case-hero">
+      <div class="container">
+        <div class="case-hero-inner">
+          <p class="case-eyebrow">Case Study 03 — Digital Strategy · Website Redesign · Stakeholder Management · Donor Compliance</p>
+          <h1 class="case-title">Redesigning the<br>ECWI Digital <em>Platform</em></h1>
+          <div class="case-meta">
+            <div class="case-meta-item">
+              <p class="case-meta-label">Organization</p>
+              <p class="case-meta-value">Early Childhood Workforce Initiative / ISSA</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-label">Timeline</p>
+              <p class="case-meta-value">2018</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-label">Scope</p>
+              <p class="case-meta-value">Global multi-stakeholder platform</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-label">Role</p>
+              <p class="case-meta-value">Digital Strategy Lead · Project Manager</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-bar">
+      <div class="stat-item">
+        <div class="stat-number">0→1</div>
+        <div class="stat-label">Download tracking implemented for the first time</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">↓</div>
+        <div class="stat-label">Bounce rate reduced through audience-first content architecture</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">✦</div>
+        <div class="stat-label">Internal team: "transformed how we talk about our work"</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="case-body">
+
+        <div class="case-section">
+          <p class="case-section-label">The Situation</p>
+          <h2>A platform that hadn't kept pace with the initiative</h2>
+          <p>Since the consortium launched in 2016, the Early Childhood Workforce Initiative had grown significantly in the depth and breadth of its work. The website, however, had not kept pace.</p>
+          <p>The platform was difficult to navigate for anyone who didn't already know what they were looking for. Key resources were buried, the visual identity undersold the initiative's ambition and credibility, and — critically — there was no meaningful way to track whether the content was reaching the audiences it was designed to serve. With no download tracking and no engagement analytics, the team was effectively flying blind.</p>
+          <p>I led the redesign from strategic brief through launch.</p>
+        </div>
+
+        <div class="case-section">
+          <p class="case-section-label">The Challenge</p>
+          <h2>A design problem that was really a strategy problem</h2>
+          <p>Redesigning a website for a multi-stakeholder international initiative is rarely just a design task. It is a diagnostic exercise: understanding what the organization is trying to achieve, who it is trying to reach, and why the current platform is failing to connect the two.</p>
+          <p>The high bounce rate was not simply a UX problem — it reflected a content architecture that did not align with how non-academic audiences think about early childhood workforce development. The site was structured around how the initiative understood itself, rather than what its audiences needed to do.</p>
+          <p>Policymakers and funders couldn't quickly locate what mattered to them. Practitioners looking for practical resources encountered similar friction. Solving these issues required more than a visual refresh — it required rethinking the site from the audience outward.</p>
+        </div>
+
+        <div class="case-section">
+          <p class="case-section-label">The Approach</p>
+          <h2>Strategy before pixels</h2>
+
+          <h3>Leading the strategic brief</h3>
+          <p>Before any design work began, I developed the strategic brief: defining the site's goals, mapping primary audiences and their needs, and establishing clear success criteria. This required asking direct questions: Who is this site for? What actions should each audience be able to take? What does success look like six months after launch?</p>
+          <p>Answering these questions required coordination with internal teams, partner organizations, and stakeholders across multiple time zones — building on existing relationships while maintaining momentum and firm timelines.</p>
+
+          <h3>Diagnosing the data problem</h3>
+          <p>One of the first things the analytics revealed was how little we knew. Without download tracking, the initiative had no way to measure whether its publications — some of its most strategically important outputs — were being engaged with at all. Traffic data raised questions but offered few answers.</p>
+          <p>A key part of my mandate became fixing this foundation: ensuring the redesigned site was built with proper tracking from the start, enabling future decisions to be grounded in evidence rather than assumptions.</p>
+
+          <h3>Content architecture and information hierarchy</h3>
+          <p>The structural work was the most consequential element of the redesign. I led discussions on how content should be organized, prioritized, and surfaced — creating clear filter options for the resource library, elevating flagship resources, and ensuring primary website attractions such as interviews and webinars could be found through intuitive pathways.</p>
+          <p>This required making deliberate decisions about what to cut, consolidate, or elevate.</p>
+
+          <h3>Managing the agency relationship</h3>
+          <p>Throughout the project, I managed the relationship with the external design and development team — translating strategic and editorial decisions into clear briefs, reviewing design iterations, and ensuring the final product reflected the initiative's identity rather than generic NGO conventions.</p>
+        </div>
+
+        <div class="impact-box">
+          <h3>Impact</h3>
+          <ul class="impact-list">
+            <li>The internal team described the redesigned site as transformative: it finally reflected the initiative's actual scope and credibility and provided a clearer way to communicate their work with partners and funders</li>
+            <li>Download tracking enabled the team to measure resource engagement and make data-informed decisions about content priorities, including meeting donor reporting requirements</li>
+            <li>Improved content architecture created clear audience pathways, reducing friction for policymakers, practitioners, and funders</li>
+            <li>Stakeholder alignment was maintained across a geographically distributed partnership without derailing the timeline</li>
+          </ul>
+        </div>
+
+        <div class="case-section">
+          <p class="case-section-label">What This Required</p>
+          <h2>Diagnosis before design</h2>
+          <p>The skills that made this project work weren't primarily technical. They were diagnostic, requiring the ability to look at an underperforming platform and understand why it was underperforming. Strategic and pragmatic decisions had to be made to translate partner goals into content and architecture. Equally important, this project required holding a complex stakeholder process together while maintaining consistent progress.</p>
+          <p>This work sits at the intersection of communications strategy, digital thinking, and organizational understanding. It is the kind of work that is hardest to delegate and easiest to underestimate.</p>
+        </div>
+
+        <div class="case-nav">
+          <a href="case-study-voices.html" class="case-nav-link">
+            <span class="case-nav-label">← Previous case study</span>
+            <span class="case-nav-title">Voices from the Field</span>
+          </a>
+          <a href="index.html#projects" class="case-nav-link right">
+            <span class="case-nav-label">All work →</span>
+            <span class="case-nav-title">Back to projects</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </article>
+
+  <footer>
+    <div class="footer-name">Emily Henry</div>
+    <div class="footer-right">
+      <a href="https://www.linkedin.com/in/emily-r-henry/" target="_blank" class="footer-linkedin">LinkedIn</a>
+      <span class="footer-copy">© 2026 Emily Henry</span>
+    </div>
+  </footer>
+
+</body>
+</html>

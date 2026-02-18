@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voices from the Field — Emily Henry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #FFFFFF; --text: #0A0A0A; --accent: #2D6A4F; --accent-light: #EAF2ED; --muted: #6B6B6B; --border: #E5E5E5; --font-serif: 'Playfair Display', Georgia, serif; --font-sans: 'DM Sans', system-ui, sans-serif; --max-w: 1200px; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-weight: 400; line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 40px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; }
+    .nav-back { font-size: 0.8rem; font-weight: 500; color: var(--muted); display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text); }
+    .case-hero { padding-top: 64px; border-bottom: 1px solid var(--border); }
+    .case-hero-inner { padding: 80px 0 60px; max-width: 800px; }
+    .case-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .case-title { font-family: var(--font-serif); font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 28px; }
+    .case-title em { font-style: italic; color: var(--accent); }
+    .case-meta { display: flex; flex-wrap: wrap; gap: 32px; padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .case-meta-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .case-meta-value { font-size: 0.9rem; font-weight: 500; }
+    .stat-bar { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); }
+    .stat-item { padding: 36px 40px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-family: var(--font-serif); font-size: 3rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+    .case-body { max-width: 720px; margin: 0 auto; padding: 80px 0; }
+    .case-section { margin-bottom: 60px; }
+    .case-section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .case-section h2 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 20px; line-height: 1.2; }
+    .case-section h3 { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; margin-top: 32px; }
+    .case-section p { font-size: 1.05rem; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
+    .case-section p:last-child { margin-bottom: 0; }
+    .case-section p strong { color: var(--text); font-weight: 500; }
+    .pull-quote { border-top: 2px solid var(--accent); border-bottom: 1px solid var(--border); padding: 32px 0; margin: 40px 0; }
+    .pull-quote p { font-family: var(--font-serif); font-style: italic; font-size: 1.3rem; color: var(--text); line-height: 1.5; margin-bottom: 12px !important; }
+    .pull-quote cite { font-size: 0.8rem; color: var(--muted); font-style: normal; font-weight: 500; }
+    .impact-box { background: var(--accent-light); border-left: 3px solid var(--accent); padding: 36px 40px; margin: 40px 0; border-radius: 0 2px 2px 0; }
+    .impact-box h3 { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; margin-bottom: 20px; color: var(--accent); }
+    .impact-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .impact-list li { font-size: 0.95rem; color: var(--text); padding-left: 20px; position: relative; line-height: 1.5; }
+    .impact-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 8px; height: 1.5px; background: var(--accent); }
+    .case-nav { border-top: 1px solid var(--border); padding: 48px 0; display: flex; justify-content: space-between; align-items: center; }
+    .case-nav-link { display: flex; flex-direction: column; gap: 6px; max-width: 280px; }
+    .case-nav-link.right { align-items: flex-end; text-align: right; }
+    .case-nav-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .case-nav-title { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--accent); transition: opacity 0.2s; }
+    .case-nav-title:hover { opacity: 0.7; }
+    footer { border-top: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-name { font-family: var(--font-serif); font-size: 0.95rem; font-weight: 600; }
+    .footer-right { display: flex; align-items: center; gap: 24px; }
+    .footer-linkedin { font-size: 0.8rem; font-weight: 500; color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 1px; transition: opacity 0.2s; }
+    .footer-linkedin:hover { opacity: 0.7; }
+    .footer-copy { font-size: 0.75rem; color: var(--muted); }
+    @media (max-width: 900px) { .container { padding: 0 24px; } nav { padding: 0 24px; } .stat-bar { grid-template-columns: 1fr; } .stat-item { border-right: none; border-bottom: 1px solid var(--border); } .case-body { padding: 48px 0; } footer { flex-direction: column; gap: 16px; text-align: center; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-back">← Back to work</a>
+    <div class="nav-logo">Emily Henry</div>
+  </nav>
+
+  <article>
+    <div class="case-hero">
+      <div class="container">
+        <div class="case-hero-inner">
+          <p class="case-eyebrow">Case Study 02 — Editorial Strategy · Publication Design · Stakeholder Communications · Project Coordination</p>
+          <h1 class="case-title">Voices from<br>the <em>Field</em></h1>
+          <div class="case-meta">
+            <div class="case-meta-item">
+              <p class="case-meta-label">Organization</p>
+              <p class="case-meta-value">Early Childhood Workforce Initiative / ISSA</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-label">Timeline</p>
+              <p class="case-meta-value">2020–2024</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-label">Context</p>
+              <p class="case-meta-value">Global COVID-19 response · Ukraine response</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-label">Role</p>
+              <p class="case-meta-value">Editorial Lead · Interviewer · Publication Designer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-bar">
+      <div class="stat-item">
+        <div class="stat-number">11</div>
+        <div class="stat-label">Countries represented across the interview series</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">Donor</div>
+        <div class="stat-label">Advocacy tool — used as a positive example of advocacy materials at donor meetings</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">Wide</div>
+        <div class="stat-label">Reach — sector events requested presentations of the series</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="case-body">
+
+        <div class="case-section">
+          <p class="case-section-label">The Situation</p>
+          <h2>The workforce absorbing the shock</h2>
+          <p>When COVID-19 hit, the early childhood workforce absorbed the shock quietly. Educators, caregivers, nurses, and program coordinators across the world kept showing up — for children, for families, for each other — while facing uncertainty around their own jobs, wages, mental health, and working conditions.</p>
+          <p>The Early Childhood Workforce Initiative had already been building a case for systemic change in how ECW professionals were recognized, supported, and resourced. The pandemic made that case urgent. We needed voices from the frontlines, in their own words.</p>
+          <p>I joined the Voices from the Field campaign mid-project and took on end-to-end responsibility for the interviews, the editorial strategy, and the visual identity of the publication series.</p>
+        </div>
+
+        <div class="case-section">
+          <p class="case-section-label">The Challenge</p>
+          <h2>Whose voices, and why?</h2>
+          <p>The project inherited the beginnings of a contributor list, but the harder question was still unanswered: whose voices, and why?</p>
+          <p>A campaign built around workforce experience could easily default to the familiar — well-resourced contexts, English-speaking professionals, perspectives already represented in international policy discussions. We wanted a global and diverse perspective.</p>
+          <p>The guiding philosophy I brought to the selection process was deliberate geographic and sectoral breadth, with an explicit commitment to amplifying underheard perspectives — practitioners in low-income and rural contexts, workers serving children with disabilities, professionals in countries where the ECW received little institutional support or recognition. The result was a series featuring professionals from <strong>11 countries across multiple sectors</strong>, whose experiences together painted a picture no single region or role could have captured alone.</p>
+        </div>
+
+        <div class="case-section">
+          <p class="case-section-label">The Approach</p>
+          <h2>Listening first. Publishing second.</h2>
+
+          <h3>Conducting the interviews</h3>
+          <p>What emerged from the conversations was something I hadn't fully anticipated: alongside exhaustion and systemic frustration, an extraordinary resilience. Practitioners who had never used technology before were learning Zoom with help from their children and then turning around to train their colleagues. Program coordinators were running workshops by radio and telephone to reach families in areas with no internet access.</p>
+
+          <div class="pull-quote">
+            <p>"We are the voice of the children. We have to be adamant not to compromise on that, no matter what the situation is."</p>
+            <cite>— Line Alvheim Elmore, preschool teacher and union representative, Norway</cite>
+          </div>
+
+          <h3>Shaping the editorial and visual identity</h3>
+          <p>The interviews generated rich material, but a publication is only as good as the editorial decisions that shape it. I worked to ensure the series had coherence across its diversity: a consistent structure that let each voice breathe, visual design that reflected the professionalism of the workforce being featured, and framing that connected individual stories to the broader ECWI position statement on COVID-19.</p>
+          <p>The goal was a publication that could function both as a human document — something practitioners could read and feel seen by — and as a strategic advocacy tool for policymakers and funders.</p>
+
+          <h3>Coordinating with ECWI partners and stakeholders</h3>
+          <p>The campaign sat within a multi-stakeholder initiative involving international partners, member organizations, and ISSA's own communications team. I managed stakeholder coordination throughout — keeping partners aligned on messaging, ensuring the publication reflected the ECWI's policy priorities, and positioning the series within the initiative's broader advocacy framework. Most importantly, this project allowed for all the regional ECD networks to collaborate and produce a campaign as one, stronger voice.</p>
+          <p>One of the most exciting parts about this project is how it sparked more conversation among ECD networks and how each could use this project template to create series for later crises — for example as part of the Ukraine response for ISSA.</p>
+        </div>
+
+        <div class="impact-box">
+          <h3>Impact</h3>
+          <ul class="impact-list">
+            <li>Multiple ECD sector events requested presentations of the series, inviting ISSA to share findings and facilitate discussions with practitioners and policymakers</li>
+            <li>The series became a primary example used in ISSA's donor advocacy workshops, demonstrating the organization's reach, credibility, and ability to translate frontline experience into policy-relevant communications</li>
+            <li>The series inspired further interview series and discussions bringing together voices from across the ECD regional networks</li>
+            <li>Partner and community response reflected that practitioners felt genuinely represented</li>
+            <li>The publication directly informed and enriched the ECWI Position Statement on COVID-19, providing the human evidence base for its five priority actions</li>
+          </ul>
+        </div>
+
+        <div class="case-section">
+          <p class="case-section-label">What This Required</p>
+          <h2>Holding a story carefully</h2>
+          <p>There's a specific skill in knowing how to hold someone's story carefully — while translating it for the audience who needs to hear it.</p>
+          <p>The Voices from the Field campaign asked for that skill constantly. It also asked for the editorial discipline to make hard choices about structure and the strategic clarity to keep the publication anchored to its advocacy purpose.</p>
+          <p>The result was a publication that did what the best communications work does: it helped people connect to an experience they hadn't understood before.</p>
+        </div>
+
+        <div class="case-nav">
+          <a href="case-study-ukraine.html" class="case-nav-link">
+            <span class="case-nav-label">← Previous case study</span>
+            <span class="case-nav-title">ISSA Connects for Ukraine</span>
+          </a>
+          <a href="case-study-ecwi.html" class="case-nav-link right">
+            <span class="case-nav-label">Next case study →</span>
+            <span class="case-nav-title">ECWI Website Redesign</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </article>
+
+  <footer>
+    <div class="footer-name">Emily Henry</div>
+    <div class="footer-right">
+      <a href="https://www.linkedin.com/in/emily-r-henry/" target="_blank" class="footer-linkedin">LinkedIn</a>
+      <span class="footer-copy">© 2026 Emily Henry</span>
+    </div>
+  </footer>
+
+</body>
+</html>
